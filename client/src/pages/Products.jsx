@@ -110,18 +110,20 @@ function Products({ cart, setCart, saveCartToDB }) {
         Products 🌿
       </Typography>
 
-      <Button
-        variant="contained"
-        onClick={() => navigate("/admin")}
-        sx={{
-          backgroundColor: "#66a617",
-          "&:hover": {
-            backgroundColor: "#4d7c0f",
-          },
-        }}
-      >
-        + Add Product
-      </Button>
+      {user?.role === "admin" && (
+        <Button
+          variant="contained"
+          onClick={() => navigate("/admin")}
+          sx={{
+            backgroundColor: "#66a617",
+            "&:hover": {
+              backgroundColor: "#4d7c0f",
+            },
+          }}
+        >
+          + Add Product
+        </Button>
+      )}
 
       <Grid container spacing={3}>
         {products.map((product) => (

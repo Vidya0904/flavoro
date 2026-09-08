@@ -8,7 +8,14 @@ import {
   CssBaseline,
   Box,
   CircularProgress,
+  Menu,
+  MenuItem,
 } from "@mui/material";
+import {
+  AccountCircle,
+  DeleteOutlineOutlined,
+  LogoutOutlined,
+} from "@mui/icons-material";
 
 import { Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
 
@@ -23,8 +30,8 @@ import Users from "./pages/Users";
 
 function App() {
   const [cart, setCart] = useState([]);
-
   const [cartLoaded, setCartLoaded] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
@@ -115,6 +122,13 @@ function App() {
     );
   }
 
+  const handleProfileClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleProfileClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <>
       <CssBaseline />
@@ -152,9 +166,50 @@ function App() {
                 </Button>
               )}
 
-              <Button sx={{ color: "white" }} onClick={handleLogout}>
-                Logout
-              </Button>
+              {/* <Button sx={{ color: "white" }} onClick={handleLogout}>
+                Logout {user?.name || user?.role}
+              </Button> */}
+
+              <Box>
+                <Button
+                  onClick={handleProfileClick}
+                  startIcon={<AccountCircle />}
+                  sx={{
+                    color: "white",
+                    textTransform: "none",
+                  }}
+                >
+                  {user?.name || user?.role}
+                </Button>
+
+                <Menu
+                  anchorEl={anchorEl}
+                  open={Boolean(anchorEl)}
+                  onClose={handleProfileClose}
+                >
+                  {user?.role !== "admin" && (
+                    <MenuItem
+                      onClick={() => {
+                        handleProfileClose();
+                        handleDeleteAccount();
+                      }}
+                    >
+                      <DeleteOutlineOutlined sx={{ mr: 1 }} />
+                      Delete Account
+                    </MenuItem>
+                  )}
+
+                  <MenuItem
+                    onClick={() => {
+                      handleProfileClose();
+                      handleLogout();
+                    }}
+                  >
+                    <LogoutOutlined sx={{ mr: 1 }} />
+                    Logout
+                  </MenuItem>
+                </Menu>
+              </Box>
             </>
           )}
         </Toolbar>

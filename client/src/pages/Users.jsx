@@ -12,6 +12,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Button,
 } from "@mui/material";
 
 function Users() {
@@ -20,9 +21,11 @@ function Users() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/admin/users");
+        const response = await axios.get("http://localhost:5000/admin/users");
+        const data = response.data;
 
-        setUsers(res.data);
+        const normalUsers = data.filter((user) => user.role !== "admin");
+        setUsers(normalUsers);
       } catch (error) {
         console.log(error);
       }
@@ -30,6 +33,18 @@ function Users() {
 
     fetchUsers();
   }, []);
+
+  const handleDelete = async (id) => {
+    if (!window.confirm("Delete this user?")) return;
+
+    try {
+      await axios.delete(`http://localhost:5000/delete-user/${id}`);
+
+      setUsers(users.filter((user) => user._id !== id));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Box sx={{ p: 3 }}>
@@ -79,6 +94,10 @@ function Users() {
 
               <TableCell>
                 <b>Total Amount</b>
+              </TableCell>
+
+              <TableCell>
+                <b>Action</b>
               </TableCell>
             </TableRow>
           </TableHead>
@@ -131,6 +150,16 @@ function Users() {
                 </TableCell>
 
                 <TableCell>₹{user.cartAmount}</TableCell>
+
+                <TableCell>
+                  <Button
+                    color="error"
+                    variant="contained"
+                    onClick={() => handleDelete(user._id)}
+                  >
+                    Delete
+                  </Button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
