@@ -6,20 +6,28 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    axios
-      .post("http://localhost:5000/login", {
+  const handleLogin = async () => {
+    try {
+      const res = await axios.post("http://localhost:5000/login", {
         email,
         password,
-      })
-      .then((res) => {
-        localStorage.setItem("user", JSON.stringify(res.data.user));
-        alert("Login success");
-        window.location.href = "/products";
-      })
-      .catch((err) => {
-        alert("Sign in failed");
       });
+
+      const user = res.data.user;
+
+      if (user) {
+        localStorage.setItem("user", JSON.stringify(user));
+
+        // role-based redirect
+        if (user.role === "admin") {
+          window.location.href = "/admin";
+        } else {
+          window.location.href = "/products";
+        }
+      }
+    } catch (error) {
+      alert("Login failed ❌");
+    }
   };
 
   return (

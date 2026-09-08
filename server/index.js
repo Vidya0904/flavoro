@@ -27,19 +27,44 @@ app.post("/signup", async (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
 
-  console.log("LOGIN DATA:", email, password);
+    const user = await User.findOne({ email, password });
 
-  const user = await User.findOne({ email, password });
-
-  console.log("USER FOUND:", user);
-
-  if (!user) {
-    return res.status(400).json({ message: "Invalid credentials" });
+    if (user) {
+      res.json({
+        message: "Login success",
+        user: user,
+      });
+    } else {
+      res.status(400).json({
+        message: "Invalid email or password",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.message });
   }
+});
 
-  res.json({ message: "Login success", user });
+app.post("/add-product", async (req, res) => {
+  try {
+    const { name, price, image } = req.body;
+
+    const newProduct = new Products({
+      name,
+      price,
+      image,
+    });
+
+    await newProduct.save();
+
+    res.json({ message: "Product added" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.message });
+  }
 });
 
 app.get("/products", async (req, res) => {

@@ -11,17 +11,19 @@ import {
 
 function Products({ cart, setCart }) {
   const [products, setProducts] = useState([]);
+  const [refresh, setRefresh] = useState(false);
 
   const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
-    if (user) {
-      axios
-        .get(`http://localhost:5000/products/${user._id}`)
-        .then((res) => setProducts(res.data))
-        .catch((err) => console.log(err));
-    }
-  }, [user]);
+    axios
+      .get("http://localhost:5000/products")
+      .then((res) => {
+        console.log("DATA:", res.data);
+        setProducts(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, [refresh]);
 
   const addToCart = (product) => {
     const exist = cart.find((item) => item._id === product._id);
@@ -40,7 +42,7 @@ function Products({ cart, setCart }) {
   return (
     <Grid container spacing={2}>
       {products.map((p) => (
-        <Grid item xs={4} key={p._id}>
+        <Grid xs={4} key={p._id}>
           <Card>
             <Box
               component="img"
