@@ -27,6 +27,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Admin from "./pages/Admin";
 import Users from "./pages/Users";
+import Home from "./pages/Home";
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -132,88 +133,93 @@ function App() {
   return (
     <>
       <CssBaseline />
+      <Box sx={{ flexGrow: 1, mb: 8 }}>
+        <AppBar
+          position="fixed"
+          sx={{
+            backgroundColor: "#66a617",
+          }}
+        >
+          <Toolbar>
+            <Typography
+              sx={{
+                flexGrow: 1,
+                fontWeight: "800",
+                textTransform: "uppercase",
+              }}
+            >
+              Flavoro 🌿
+            </Typography>
 
-      <AppBar
-        position="static"
-        sx={{
-          backgroundColor: "#66a617",
-        }}
-      >
-        <Toolbar>
-          <Typography
-            sx={{
-              flexGrow: 1,
-              fontWeight: "800",
-              textTransform: "uppercase",
-            }}
-          >
-            Flavoro 🌿
-          </Typography>
-
-          {user && (
-            <>
-              <Button sx={{ color: "white" }} component={Link} to="/products">
-                Products
-              </Button>
-
-              {user.role === "admin" ? (
-                <Button sx={{ color: "white" }} component={Link} to="/users">
-                  Users
+            {user && (
+              <>
+                <Button sx={{ color: "white" }} component={Link} to="/home">
+                  Home
                 </Button>
-              ) : (
-                <Button sx={{ color: "white" }} component={Link} to="/cart">
-                  Cart ({cart.reduce((total, item) => total + item.qty, 0)})
-                </Button>
-              )}
 
-              {/* <Button sx={{ color: "white" }} onClick={handleLogout}>
+                <Button sx={{ color: "white" }} component={Link} to="/products">
+                  Products
+                </Button>
+
+                {user.role === "admin" ? (
+                  <Button sx={{ color: "white" }} component={Link} to="/users">
+                    Users
+                  </Button>
+                ) : (
+                  <Button sx={{ color: "white" }} component={Link} to="/cart">
+                    Cart ({cart.reduce((total, item) => total + item.qty, 0)})
+                  </Button>
+                )}
+
+                {/* <Button sx={{ color: "white" }} onClick={handleLogout}>
                 Logout {user?.name || user?.role}
               </Button> */}
 
-              <Box>
-                <Button
-                  onClick={handleProfileClick}
-                  startIcon={<AccountCircle />}
-                  sx={{
-                    color: "white",
-                    textTransform: "none",
-                  }}
-                >
-                  {user?.name || user?.role}
-                </Button>
+                <Box>
+                  <Button
+                    onClick={handleProfileClick}
+                    startIcon={<AccountCircle />}
+                    sx={{
+                      color: "white",
+                      textTransform: "none",
+                    }}
+                  >
+                    {user?.name || user?.role}
+                  </Button>
 
-                <Menu
-                  anchorEl={anchorEl}
-                  open={Boolean(anchorEl)}
-                  onClose={handleProfileClose}
-                >
-                  {user?.role !== "admin" && (
+                  <Menu
+                    anchorEl={anchorEl}
+                    open={Boolean(anchorEl)}
+                    onClose={handleProfileClose}
+                  >
+                    {user?.role !== "admin" && (
+                      <MenuItem
+                        onClick={() => {
+                          handleProfileClose();
+                          handleDeleteAccount();
+                        }}
+                      >
+                        <DeleteOutlineOutlined sx={{ mr: 1 }} />
+                        Delete Account
+                      </MenuItem>
+                    )}
+
                     <MenuItem
                       onClick={() => {
                         handleProfileClose();
-                        handleDeleteAccount();
+                        handleLogout();
                       }}
                     >
-                      <DeleteOutlineOutlined sx={{ mr: 1 }} />
-                      Delete Account
+                      <LogoutOutlined sx={{ mr: 1 }} />
+                      Logout
                     </MenuItem>
-                  )}
-
-                  <MenuItem
-                    onClick={() => {
-                      handleProfileClose();
-                      handleLogout();
-                    }}
-                  >
-                    <LogoutOutlined sx={{ mr: 1 }} />
-                    Logout
-                  </MenuItem>
-                </Menu>
-              </Box>
-            </>
-          )}
-        </Toolbar>
-      </AppBar>
+                  </Menu>
+                </Box>
+              </>
+            )}
+          </Toolbar>
+        </AppBar>
+      </Box>
 
       <Routes>
         {/* LOGIN */}
@@ -234,6 +240,13 @@ function App() {
         {/* SIGNUP */}
 
         <Route path="/signup" element={<Signup />} />
+
+        {/* HOME */}
+
+        <Route
+          path="/home"
+          element={user ? <Home /> : <Login setUser={setUser} />}
+        />
 
         {/* PRODUCTS */}
 
