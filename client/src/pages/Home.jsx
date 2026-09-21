@@ -146,9 +146,9 @@ function Home() {
                       fontSize: {
                         xs: "15px",
                         sm: "18px",
-                        md: "15px",
+                        md: "20px",
                       },
-                      color: "#6a6a6a",
+                      color: "#777",
                       mb: 3,
                       maxWidth: 480,
                     }}
@@ -211,7 +211,7 @@ function Home() {
               sx={{
                 color: "#fff",
                 textShadow: "2px 1px 2px rgba(0, 0, 0, 0.7);",
-                fontSize: "20px",
+                fontSize: "30px",
                 fontWeight: 700,
                 lineHeight: 1.1,
                 textTransform: "uppercase",
@@ -255,7 +255,7 @@ function Home() {
               sx={{
                 color: "#fff",
                 textShadow: "2px 1px 2px rgba(0, 0, 0, 0.7);",
-                fontSize: "20px",
+                fontSize: "30px",
                 fontWeight: 700,
                 lineHeight: 1.1,
                 textTransform: "uppercase",
@@ -298,7 +298,7 @@ function Home() {
               sx={{
                 color: "#fff",
                 textShadow: "2px 1px 2px rgba(0, 0, 0, 0.7);",
-                fontSize: "20px",
+                fontSize: "30px",
                 fontWeight: 700,
                 lineHeight: 1.1,
                 textTransform: "uppercase",
@@ -325,7 +325,74 @@ function Home() {
 
       {/* Banner Services */}
       <Box>
-        <Grid container columns={12} sx={{ mt: -1 }}></Grid>
+        <Grid container columns={12} sx={{ my: 10, px: 5 }}>
+          <Grid
+            size={6}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Box
+              component="img"
+              src="./images/banner_service.jpg"
+              sx={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
+          </Grid>
+          <Grid size={6}>
+            <Typography
+              component="h2"
+              sx={{
+                color: "#777",
+                fontSize: "18px",
+                mt: 2,
+                textTransform: "uppercase",
+              }}
+            >
+              - Organic fruit Store -
+            </Typography>
+            <Typography
+              component="h2"
+              sx={{ fontSize: "50px", fontWeight: 700, mt: 2, color: "#000" }}
+            >
+              Organic Fruits
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: "15px",
+                fontWeight: 400,
+                mt: 2,
+                color: "#777",
+                letterSpacing: 0.4,
+              }}
+            >
+              Enjoy fresh, naturally grown organic fruits delivered straight to
+              your doorstep. We carefully select high-quality seasonal fruits
+              from trusted farmers and suppliers to bring you delicious,
+              healthy, and chemical-free choices. From everyday favorites to
+              fresh seasonal varieties, our goal is to make healthy eating
+              simple, convenient, and full of flavor.
+            </Typography>
+            <Button
+              variant="contained"
+              sx={{
+                border: "1px solid #88b121",
+                backgroundColor: "#fff",
+                color: "#88b121",
+                px: 4,
+                py: 1.3,
+                borderRadius: "5px",
+                fontSize: "16px",
+                fontWeight: 500,
+                textTransform: "capitalize",
+                mt: 3,
+              }}
+            >
+              Read More
+            </Button>
+          </Grid>
+        </Grid>
       </Box>
     </>
   );
