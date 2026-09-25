@@ -1054,6 +1054,16 @@ function Home() {
           </Grid>
         </Grid>
       </Box>
+
+      {/* Img Banner */}
+      <Grid container columns={12} spacing={4} sx={{ px: 8 }}>
+        <Grid size={6}>
+          <img src="./images/imgBanner/imgbanner-1.jpg" width="100%" />
+        </Grid>
+        <Grid size={6}>
+          <img src="./images/imgBanner/imgbanner-2.jpg" width="100%" />
+        </Grid>
+      </Grid>
     </>
   );
 }
