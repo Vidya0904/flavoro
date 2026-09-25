@@ -1,6 +1,17 @@
 import React from "react";
-import { Box, Button, Grid, Typography } from "@mui/material";
-
+import {
+  Box,
+  Button,
+  Fade,
+  Grid,
+  Link,
+  Rating,
+  Tooltip,
+  Typography,
+} from "@mui/material";
+import ShoppingBasketOutlinedIcon from "@mui/icons-material/ShoppingBasketOutlined";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -35,6 +46,8 @@ function Home() {
     arrows: false,
     pauseOnHover: true,
   };
+
+  const [value, setValue] = React.useState(2);
 
   return (
     <>
@@ -393,6 +406,591 @@ function Home() {
             </Button>
           </Grid>
         </Grid>
+      </Box>
+
+      {/* Parallex */}
+      <Box
+        sx={{
+          position: "relative",
+          height: 550,
+          backgroundImage: "url('/images/parallex.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <Box sx={{ py: 5, pr: 4, width: "60%", marginLeft: "auto" }}>
+          <Typography
+            variant="h2"
+            sx={{ fontSize: "30px", color: "#fff", px: 5, fontWeight: 700 }}
+          >
+            On Sale
+          </Typography>
+          <Typography sx={{ fontSize: "16px", color: "#777", px: 5 }}>
+            On sale products to weekly line up
+          </Typography>
+
+          <Grid
+            container
+            columns={12}
+            spacing={4}
+            sx={{
+              mt: 3,
+              px: 5,
+            }}
+          >
+            <Grid
+              size={6}
+              sx={{
+                backgroundColor: "rgb(244, 243, 243)",
+                borderRadius: "6px",
+              }}
+            >
+              <Box
+                sx={{ display: "flex", alignItems: "center", height: "150px" }}
+              >
+                <img
+                  src="/images/onsale/f1.png"
+                  alt="Product 1"
+                  width="150px"
+                />
+
+                <Box sx={{ p: 2, flex: 1 }}>
+                  <Link
+                    href="#"
+                    sx={{
+                      textDecoration: "none",
+                      color: "#000",
+                      transition: "all 0.2s",
+                      "&:hover": { color: "#66a617" },
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        fontSize: "16px",
+                        fontWeight: 700,
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        maxWidth: "150px",
+                      }}
+                    >
+                      Premium Alphonso Mango
+                    </Typography>
+                  </Link>
+                  <Rating
+                    name="simple-uncontrolled"
+                    onChange={(event, newValue) => {
+                      console.log(newValue);
+                    }}
+                    defaultValue={0}
+                  />
+                  <Typography sx={{ fontSize: "14px", color: "#000" }}>
+                    $19.99
+                  </Typography>
+                  <Grid container sx={{ mt: 1 }}>
+                    <Grid size={4}>
+                      <Tooltip
+                        describeChild
+                        title="Basket"
+                        placement="top"
+                        arrow
+                        slots={{
+                          transition: Fade,
+                        }}
+                      >
+                        <Button
+                          sx={{
+                            backgroundColor: "#fff",
+                            color: "#000",
+                            minWidth: "0px",
+                            transition: "ease 0.3s",
+
+                            "&:hover": {
+                              backgroundColor: "#88b121",
+                              color: "#fff",
+                            },
+                          }}
+                        >
+                          <ShoppingBasketOutlinedIcon
+                            sx={{ fontSize: "27px" }}
+                          />
+                        </Button>
+                      </Tooltip>
+                    </Grid>
+                    <Grid size={4}>
+                      <Tooltip
+                        describeChild
+                        title="Add to Wishlist"
+                        placement="top"
+                        arrow
+                        slots={{
+                          transition: Fade,
+                        }}
+                      >
+                        <Button
+                          sx={{
+                            backgroundColor: "#fff",
+                            color: "#000",
+                            minWidth: "0px",
+                            transition: "ease 0.3s",
+
+                            "&:hover": {
+                              backgroundColor: "#88b121",
+                              color: "#fff",
+                            },
+                          }}
+                        >
+                          <FavoriteBorderIcon sx={{ fontSize: "27px" }} />
+                        </Button>
+                      </Tooltip>
+                    </Grid>
+                    <Grid size={4}>
+                      <Tooltip
+                        describeChild
+                        title="Quick View"
+                        placement="top"
+                        arrow
+                        slots={{
+                          transition: Fade,
+                        }}
+                      >
+                        <Button
+                          sx={{
+                            backgroundColor: "#fff",
+                            color: "#000",
+                            minWidth: "0px",
+                            transition: "ease 0.3s",
+
+                            "&:hover": {
+                              backgroundColor: "#88b121",
+                              color: "#fff",
+                            },
+                          }}
+                        >
+                          <VisibilityOutlinedIcon sx={{ fontSize: "27px" }} />
+                        </Button>
+                      </Tooltip>
+                    </Grid>
+                  </Grid>
+                </Box>
+              </Box>
+            </Grid>
+            <Grid
+              size={6}
+              sx={{
+                backgroundColor: "rgb(244, 243, 243)",
+                borderRadius: "6px",
+              }}
+            >
+              <Box
+                sx={{ display: "flex", alignItems: "center", height: "150px" }}
+              >
+                <img
+                  src="/images/onsale/f1.png"
+                  alt="Product 1"
+                  width="150px"
+                />
+
+                <Box sx={{ p: 2, flex: 1 }}>
+                  <Link
+                    href="#"
+                    sx={{
+                      textDecoration: "none",
+                      color: "#000",
+                      transition: "all 0.2s",
+                      "&:hover": { color: "#66a617" },
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        fontSize: "16px",
+                        fontWeight: 700,
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        maxWidth: "150px",
+                      }}
+                    >
+                      Premium Alphonso Mango
+                    </Typography>
+                  </Link>
+                  <Rating
+                    name="simple-uncontrolled"
+                    onChange={(event, newValue) => {
+                      console.log(newValue);
+                    }}
+                    defaultValue={0}
+                  />
+                  <Typography sx={{ fontSize: "14px", color: "#000" }}>
+                    $19.99
+                  </Typography>
+                  <Grid container sx={{ mt: 1 }}>
+                    <Grid size={4}>
+                      <Tooltip
+                        describeChild
+                        title="Basket"
+                        placement="top"
+                        arrow
+                        slots={{
+                          transition: Fade,
+                        }}
+                      >
+                        <Button
+                          sx={{
+                            backgroundColor: "#fff",
+                            color: "#000",
+                            minWidth: "0px",
+                            transition: "ease 0.3s",
+
+                            "&:hover": {
+                              backgroundColor: "#88b121",
+                              color: "#fff",
+                            },
+                          }}
+                        >
+                          <ShoppingBasketOutlinedIcon
+                            sx={{ fontSize: "27px" }}
+                          />
+                        </Button>
+                      </Tooltip>
+                    </Grid>
+                    <Grid size={4}>
+                      <Tooltip
+                        describeChild
+                        title="Add to Wishlist"
+                        placement="top"
+                        arrow
+                        slots={{
+                          transition: Fade,
+                        }}
+                      >
+                        <Button
+                          sx={{
+                            backgroundColor: "#fff",
+                            color: "#000",
+                            minWidth: "0px",
+                            transition: "ease 0.3s",
+
+                            "&:hover": {
+                              backgroundColor: "#88b121",
+                              color: "#fff",
+                            },
+                          }}
+                        >
+                          <FavoriteBorderIcon sx={{ fontSize: "27px" }} />
+                        </Button>
+                      </Tooltip>
+                    </Grid>
+                    <Grid size={4}>
+                      <Tooltip
+                        describeChild
+                        title="Quick View"
+                        placement="top"
+                        arrow
+                        slots={{
+                          transition: Fade,
+                        }}
+                      >
+                        <Button
+                          sx={{
+                            backgroundColor: "#fff",
+                            color: "#000",
+                            minWidth: "0px",
+                            transition: "ease 0.3s",
+
+                            "&:hover": {
+                              backgroundColor: "#88b121",
+                              color: "#fff",
+                            },
+                          }}
+                        >
+                          <VisibilityOutlinedIcon sx={{ fontSize: "27px" }} />
+                        </Button>
+                      </Tooltip>
+                    </Grid>
+                  </Grid>
+                </Box>
+              </Box>
+            </Grid>
+            <Grid
+              size={6}
+              sx={{
+                backgroundColor: "rgb(244, 243, 243)",
+                borderRadius: "6px",
+              }}
+            >
+              <Box
+                sx={{ display: "flex", alignItems: "center", height: "150px" }}
+              >
+                <img
+                  src="/images/onsale/f1.png"
+                  alt="Product 1"
+                  width="150px"
+                />
+
+                <Box sx={{ p: 2, flex: 1 }}>
+                  <Link
+                    href="#"
+                    sx={{
+                      textDecoration: "none",
+                      color: "#000",
+                      transition: "all 0.2s",
+                      "&:hover": { color: "#66a617" },
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        fontSize: "16px",
+                        fontWeight: 700,
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        maxWidth: "150px",
+                      }}
+                    >
+                      Premium Alphonso Mango
+                    </Typography>
+                  </Link>
+                  <Rating
+                    name="simple-uncontrolled"
+                    onChange={(event, newValue) => {
+                      console.log(newValue);
+                    }}
+                    defaultValue={0}
+                  />
+                  <Typography sx={{ fontSize: "14px", color: "#000" }}>
+                    $19.99
+                  </Typography>
+                  <Grid container sx={{ mt: 1 }}>
+                    <Grid size={4}>
+                      <Tooltip
+                        describeChild
+                        title="Basket"
+                        placement="top"
+                        arrow
+                        slots={{
+                          transition: Fade,
+                        }}
+                      >
+                        <Button
+                          sx={{
+                            backgroundColor: "#fff",
+                            color: "#000",
+                            minWidth: "0px",
+                            transition: "ease 0.3s",
+
+                            "&:hover": {
+                              backgroundColor: "#88b121",
+                              color: "#fff",
+                            },
+                          }}
+                        >
+                          <ShoppingBasketOutlinedIcon
+                            sx={{ fontSize: "27px" }}
+                          />
+                        </Button>
+                      </Tooltip>
+                    </Grid>
+                    <Grid size={4}>
+                      <Tooltip
+                        describeChild
+                        title="Add to Wishlist"
+                        placement="top"
+                        arrow
+                        slots={{
+                          transition: Fade,
+                        }}
+                      >
+                        <Button
+                          sx={{
+                            backgroundColor: "#fff",
+                            color: "#000",
+                            minWidth: "0px",
+                            transition: "ease 0.3s",
+
+                            "&:hover": {
+                              backgroundColor: "#88b121",
+                              color: "#fff",
+                            },
+                          }}
+                        >
+                          <FavoriteBorderIcon sx={{ fontSize: "27px" }} />
+                        </Button>
+                      </Tooltip>
+                    </Grid>
+                    <Grid size={4}>
+                      <Tooltip
+                        describeChild
+                        title="Quick View"
+                        placement="top"
+                        arrow
+                        slots={{
+                          transition: Fade,
+                        }}
+                      >
+                        <Button
+                          sx={{
+                            backgroundColor: "#fff",
+                            color: "#000",
+                            minWidth: "0px",
+                            transition: "ease 0.3s",
+
+                            "&:hover": {
+                              backgroundColor: "#88b121",
+                              color: "#fff",
+                            },
+                          }}
+                        >
+                          <VisibilityOutlinedIcon sx={{ fontSize: "27px" }} />
+                        </Button>
+                      </Tooltip>
+                    </Grid>
+                  </Grid>
+                </Box>
+              </Box>
+            </Grid>
+            <Grid
+              size={6}
+              sx={{
+                backgroundColor: "rgb(244, 243, 243)",
+                borderRadius: "6px",
+              }}
+            >
+              <Box
+                sx={{ display: "flex", alignItems: "center", height: "150px" }}
+              >
+                <img
+                  src="/images/onsale/f1.png"
+                  alt="Product 1"
+                  width="150px"
+                />
+
+                <Box sx={{ p: 2, flex: 1 }}>
+                  <Link
+                    href="#"
+                    sx={{
+                      textDecoration: "none",
+                      color: "#000",
+                      transition: "all 0.2s",
+                      "&:hover": { color: "#66a617" },
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        fontSize: "16px",
+                        fontWeight: 700,
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        maxWidth: "150px",
+                      }}
+                    >
+                      Premium Alphonso Mango
+                    </Typography>
+                  </Link>
+                  <Rating
+                    name="simple-uncontrolled"
+                    onChange={(event, newValue) => {
+                      console.log(newValue);
+                    }}
+                    defaultValue={0}
+                  />
+                  <Typography sx={{ fontSize: "14px", color: "#000" }}>
+                    $19.99
+                  </Typography>
+                  <Grid container sx={{ mt: 1 }}>
+                    <Grid size={4}>
+                      <Tooltip
+                        describeChild
+                        title="Basket"
+                        placement="top"
+                        arrow
+                        slots={{
+                          transition: Fade,
+                        }}
+                      >
+                        <Button
+                          sx={{
+                            backgroundColor: "#fff",
+                            color: "#000",
+                            minWidth: "0px",
+                            transition: "ease 0.3s",
+
+                            "&:hover": {
+                              backgroundColor: "#88b121",
+                              color: "#fff",
+                            },
+                          }}
+                        >
+                          <ShoppingBasketOutlinedIcon
+                            sx={{ fontSize: "27px" }}
+                          />
+                        </Button>
+                      </Tooltip>
+                    </Grid>
+                    <Grid size={4}>
+                      <Tooltip
+                        describeChild
+                        title="Add to Wishlist"
+                        placement="top"
+                        arrow
+                        slots={{
+                          transition: Fade,
+                        }}
+                      >
+                        <Button
+                          sx={{
+                            backgroundColor: "#fff",
+                            color: "#000",
+                            minWidth: "0px",
+                            transition: "ease 0.3s",
+
+                            "&:hover": {
+                              backgroundColor: "#88b121",
+                              color: "#fff",
+                            },
+                          }}
+                        >
+                          <FavoriteBorderIcon sx={{ fontSize: "27px" }} />
+                        </Button>
+                      </Tooltip>
+                    </Grid>
+                    <Grid size={4}>
+                      <Tooltip
+                        describeChild
+                        title="Quick View"
+                        placement="top"
+                        arrow
+                        slots={{
+                          transition: Fade,
+                        }}
+                      >
+                        <Button
+                          sx={{
+                            backgroundColor: "#fff",
+                            color: "#000",
+                            minWidth: "0px",
+                            transition: "ease 0.3s",
+
+                            "&:hover": {
+                              backgroundColor: "#88b121",
+                              color: "#fff",
+                            },
+                          }}
+                        >
+                          <VisibilityOutlinedIcon sx={{ fontSize: "27px" }} />
+                        </Button>
+                      </Tooltip>
+                    </Grid>
+                  </Grid>
+                </Box>
+              </Box>
+            </Grid>
+          </Grid>
+        </Box>
       </Box>
     </>
   );
