@@ -336,7 +336,7 @@ function Home() {
         </Grid>
       </Grid>
 
-      {/* Banner Services */}
+      {/* About */}
       <Box>
         <Grid container columns={12} sx={{ my: 10, px: 5 }}>
           <Grid
@@ -991,6 +991,68 @@ function Home() {
             </Grid>
           </Grid>
         </Box>
+      </Box>
+
+      {/* Services */}
+      <Box sx={{ my: 8, px: 8 }}>
+        <Grid
+          container
+          columns={12}
+          spacing={10}
+          sx={{ border: "1px solid #000", p: 5 }}
+        >
+          <Grid size={4}>
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <img src="./images/services/support.png" width="50px" />
+              <Box sx={{ ml: 3 }}>
+                <Typography
+                  variant="h5"
+                  sx={{ color: "#000", fontWeight: "600", mb: 1 }}
+                >
+                  24/7 free support
+                </Typography>
+                <Typography variant="body2" sx={{ color: "#777" }}>
+                  Passage of Lorem Ipsum, you need to be amet embarrassing.
+                </Typography>
+              </Box>
+            </Box>
+          </Grid>
+          <Grid size={4}>
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <img src="./images/services/transport.png" width="50px" />
+              <Box sx={{ ml: 3 }}>
+                <Typography
+                  variant="h5"
+                  sx={{ color: "#000", fontWeight: "600", mb: 1 }}
+                >
+                  Free worldwide shipping
+                </Typography>
+                <Typography variant="body2" sx={{ color: "#777" }}>
+                  Passage of Lorem Ipsum, you need to be amet embarrassing.
+                </Typography>
+              </Box>
+            </Box>
+          </Grid>
+          <Grid size={4}>
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <img
+                src="./images/services/money-back-guarantee.png"
+                width="50px"
+              />
+              <Box sx={{ ml: 3 }}>
+                <Typography
+                  variant="h5"
+                  sx={{ color: "#000", fontWeight: "600", mb: 1 }}
+                >
+                  Money back guarantee
+                </Typography>
+                <Typography variant="body2" sx={{ color: "#777" }}>
+                  Passage of Lorem Ipsum, you need to be amet embarrassing.
+                </Typography>
+              </Box>
+            </Box>
+          </Grid>
+        </Grid>
       </Box>
     </>
   );
