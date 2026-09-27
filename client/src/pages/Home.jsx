@@ -8,6 +8,9 @@ import {
   Rating,
   Tooltip,
   Typography,
+  Card,
+  CardMedia,
+  CardContent,
 } from "@mui/material";
 import ShoppingBasketOutlinedIcon from "@mui/icons-material/ShoppingBasketOutlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -31,6 +34,102 @@ const slides = [
     title: "Farm Fresh Fruits For Your Health",
     subtitle: "Fresh fruits delivered to your home, straight from the farm",
     button: "Explore",
+  },
+];
+
+const slides2 = [
+  {
+    name: "John Doe",
+    designation: "developer",
+    para: "Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodydo molestie elit quam, iaculis sed sempsum Dolor tusima latiup udgn vitae nibh. at magna akal semperFusceSed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie elit quam, iaculis sed sempsum Dolor tusima olatiup udin vitae nibh. at magna akal semperFusce.",
+  },
+  {
+    name: "Harry Potter",
+    designation: "developer",
+    para: "Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodydo molestie elit quam, iaculis sed sempsum Dolor tusima latiup udgn vitae nibh. at magna akal semperFusceSed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie elit quam, iaculis sed sempsum Dolor tusima olatiup udin vitae nibh. at magna akal semperFusce.",
+  },
+  {
+    name: "Nilon Peter",
+    designation: "developer",
+    para: "Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodydo molestie elit quam, iaculis sed sempsum Dolor tusima latiup udgn vitae nibh. at magna akal semperFusceSed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie elit quam, iaculis sed sempsum Dolor tusima olatiup udin vitae nibh. at magna akal semperFusce.",
+  },
+];
+
+const blogs = [
+  {
+    img: "/images/blogs/b1.jpg",
+    date: "1 Jun, 2026",
+    category: "Healthy Living",
+    title: "5 Benefits of Eating Fresh Fruits Every Day",
+    description:
+      "Discover simple ways fresh fruits can support a healthy and refreshing lifestyle.",
+  },
+  {
+    img: "/images/blogs/b2.jpg",
+    date: "1 Jun, 2026",
+    category: "Fruit Guide",
+    title: "How to Choose the Perfect Alphonso Mango",
+    description:
+      "Learn simple tips to choose sweet, juicy, and perfectly ripe Alphonso mangoes.",
+  },
+  {
+    img: "/images/blogs/b3.jpg",
+    date: "1 Jun, 2026",
+    category: "Freshness Tips",
+    title: "How to Keep Your Fruits Fresh for Longer",
+    description:
+      "Follow these easy storage tips to keep your favorite fruits fresh and delicious.",
+  },
+  {
+    img: "/images/blogs/b4.jpg",
+    date: "1 Jun, 2026",
+    category: "Seasonal Fruits",
+    title: "Best Fruits for a Refreshing Summer",
+    description:
+      "Stay fresh and hydrated with delicious seasonal fruits perfect for warm days.",
+  },
+  {
+    img: "/images/blogs/b5.jpg",
+    date: "1 Jun, 2026",
+    category: "Recipes",
+    title: "Easy and Healthy Fruit Bowl Ideas",
+    description:
+      "Create colorful and delicious fruit bowls using your favorite fresh fruits.",
+  },
+  {
+    img: "/images/blogs/b2.jpg",
+    date: "1 Jun, 2026",
+    category: "Organic Fruits",
+    title: "What You Should Know",
+    description:
+      "Learn what makes organic fruits different and how to choose quality produce.",
+  },
+];
+
+const brands = [
+  {
+    img: "/images/brands/b1.png",
+  },
+  {
+    img: "/images/brands/b2.png",
+  },
+  {
+    img: "/images/brands/b3.png",
+  },
+  {
+    img: "/images/brands/b4.png",
+  },
+  {
+    img: "/images/brands/b5.png",
+  },
+  {
+    img: "/images/brands/b6.png",
+  },
+  {
+    img: "/images/brands/b7.png",
+  },
+  {
+    img: "/images/brands/b8.png",
   },
 ];
 
@@ -201,7 +300,6 @@ function Home() {
           ))}
         </SlickSlider>
       </Box>
-
       {/* Card */}
       <Grid container columns={12} sx={{ mt: -1 }}>
         <Grid size={4} sx={{ position: "relative" }}>
@@ -335,7 +433,6 @@ function Home() {
           </Box>
         </Grid>
       </Grid>
-
       {/* About */}
       <Box>
         <Grid container columns={12} sx={{ my: 10, px: 5 }}>
@@ -407,7 +504,6 @@ function Home() {
           </Grid>
         </Grid>
       </Box>
-
       {/* Parallex */}
       <Box
         sx={{
@@ -992,7 +1088,6 @@ function Home() {
           </Grid>
         </Box>
       </Box>
-
       {/* Services */}
       <Box sx={{ my: 8, px: 8 }}>
         <Grid
@@ -1054,7 +1149,6 @@ function Home() {
           </Grid>
         </Grid>
       </Box>
-
       {/* Img Banner */}
       <Grid container columns={12} spacing={4} sx={{ px: 8 }}>
         <Grid size={6}>
@@ -1063,6 +1157,137 @@ function Home() {
         <Grid size={6}>
           <img src="./images/imgBanner/imgbanner-2.jpg" width="100%" />
         </Grid>
+      </Grid>
+      {/* Testimoial */}
+      <Box
+        sx={{
+          width: "100%",
+          // overflow: "hidden",
+
+          "& .slick-dots": {
+            bottom: -10,
+          },
+
+          "& .slick-dots li button:before": {
+            color: "#c6c6c6",
+            fontSize: "15px",
+            opacity: 0.6,
+          },
+
+          "& .slick-dots li.slick-active button:before": {
+            color: "#8BC34A",
+            opacity: 1,
+          },
+        }}
+      >
+        <SlickSlider {...settings}>
+          {slides2.map((slide, index) => (
+            <Box key={index}>
+              {/* Content */}
+              <Box
+                sx={{
+                  p: 8,
+                  textAlign: "center",
+                }}
+              >
+                <Box
+                  component="img"
+                  src="/images/profile.png"
+                  sx={{
+                    borderRadius: "50%",
+                    margin: "0 auto",
+                    border: "2px solid #66a617",
+                    width: "120px",
+                    height: "120px",
+                  }}
+                />
+                <Box
+                  sx={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    mb: 2,
+                    mt: 1,
+                    textAlign: "center",
+                  }}
+                >
+                  <Typography variant="h6" sx={{ color: "#66a617", mr: 1 }}>
+                    {slide.name}
+                  </Typography>
+                  <Typography variant="span" sx={{ color: "#777" }}>
+                    - {slide.designation}
+                  </Typography>
+                </Box>
+                <Typography variant="body1" sx={{ color: "#444" }}>
+                  {slide.para}
+                </Typography>
+              </Box>
+            </Box>
+          ))}
+        </SlickSlider>
+      </Box>
+      {/* Blog  */}
+      <Box sx={{ px: 8, my: 8 }}>
+        <Typography variant="h4" sx={{ color: "#000", fontWeight: "700" }}>
+          Latest Blog
+        </Typography>
+        <Typography variant="body2" sx={{ color: "#777", mt: 1 }}>
+          All Recent Post from WbBlog
+        </Typography>
+
+        <Grid container columns={12} spacing={5} sx={{ mt: 3 }}>
+          {blogs.map((b, index) => (
+            <Grid key={index} size={4}>
+              <Card sx={{ boxShadow: "0px 0px 8px 0px rgba(4, 0, 0, 0.08)" }}>
+                <CardMedia sx={{ height: 200 }} image={b.img} title="b1" />
+                <CardContent>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Typography
+                      variant="body1"
+                      sx={{ color: "#66a617", fontWeight: "600" }}
+                    >
+                      {b.category}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{ color: "#777", textAlign: "end" }}
+                    >
+                      {b.date}
+                    </Typography>
+                  </Box>
+                  <Typography
+                    variant="h5"
+                    sx={{
+                      color: "#000",
+                      fontWeight: "700",
+                      letterSpacing: 0.5,
+                      mt: 2,
+                      mb: 1,
+                    }}
+                  >
+                    {b.title}
+                  </Typography>
+                  <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                    {b.description}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
+      {/* Brands */}
+      <Grid container columns={16} spacing={2} sx={{ my: 5, px: 8 }}>
+        {brands.map((b, index) => (
+          <Grid key={index} size={2}>
+            <Box component="img" src={b.img} sx={{ width: "120px" }} />
+          </Grid>
+        ))}
       </Grid>
     </>
   );

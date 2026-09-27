@@ -28,6 +28,7 @@ import Signup from "./pages/Signup";
 import Admin from "./pages/Admin";
 import Users from "./pages/Users";
 import Home from "./pages/Home";
+import Footer from "./pages/Footer";
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -292,6 +293,8 @@ function App() {
           element={user?.role === "admin" ? <Users /> : <Navigate to="/" />}
         />
       </Routes>
+
+      <Footer />
     </>
   );
 }
