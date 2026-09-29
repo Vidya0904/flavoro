@@ -202,9 +202,19 @@ function App() {
                 Products
               </Button>
 
-              <Button sx={{ color: "white" }} component={Link} to="/cart">
+              {/* <Button sx={{ color: "white" }} component={Link} to="/cart">
                 Cart ({cart.reduce((total, item) => total + item.qty, 0)})
-              </Button>
+              </Button> */}
+
+              {user?.role === "admin" ? (
+                <Button sx={{ color: "white" }} component={Link} to="/users">
+                  Users
+                </Button>
+              ) : (
+                <Button sx={{ color: "white" }} component={Link} to="/cart">
+                  Cart ({cart.reduce((total, item) => total + item.qty, 0)})
+                </Button>
+              )}
 
               {user ? (
                 <Box>
@@ -396,15 +406,15 @@ function App() {
         <Route
           path="/products"
           element={
-            user ? (
-              <Products
-                cart={cart}
-                setCart={setCart}
-                saveCartToDB={saveCartToDB}
-              />
-            ) : (
-              <Navigate to="/" />
-            )
+            // user ? (
+            <Products
+              cart={cart}
+              setCart={setCart}
+              saveCartToDB={saveCartToDB}
+            />
+            // ) : (
+            // <Navigate to="/" />
+            // )
           }
         />
 
@@ -413,11 +423,11 @@ function App() {
         <Route
           path="/cart"
           element={
-            user && user.role !== "admin" ? (
-              <Cart cart={cart} setCart={setCart} saveCartToDB={saveCartToDB} />
-            ) : (
-              <Navigate to="/" />
-            )
+            // user && user.role !== "admin" ? (
+            <Cart cart={cart} setCart={setCart} saveCartToDB={saveCartToDB} />
+            // ) : (
+            // <Navigate to="/" />
+            // )
           }
         />
 
