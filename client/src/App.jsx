@@ -349,8 +349,13 @@ function App() {
                 </ListItemButton>
               </ListItem>
 
-              <ListItem disablePadding>
-                <ListItemButton onClick={() => handleMobileNavigation("/cart")}>
+              {/* CART - Only for normal users */}
+              {user?.role !== "admin" && (
+                <ListItemButton
+                  component={Link}
+                  to="/cart"
+                  onClick={handleMobileMenuClose}
+                >
                   <ListItemText
                     primary={`Cart (${cart.reduce(
                       (total, item) => total + item.qty,
@@ -358,7 +363,7 @@ function App() {
                     )})`}
                   />
                 </ListItemButton>
-              </ListItem>
+              )}
 
               <Divider />
 
