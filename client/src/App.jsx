@@ -54,7 +54,10 @@ function App() {
       setCartLoaded(false);
 
       try {
-        const res = await axios.get(`http://localhost:5000/cart/${user._id}`);
+        // const res = await axios.get(`http://localhost:5000/cart/${user._id}`);
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_URL}/cart/${user._id}`,
+        );
 
         setCart(res.data.items || []);
       } catch (error) {
@@ -78,7 +81,8 @@ function App() {
     }
 
     try {
-      await axios.post("http://localhost:5000/cart", {
+      // await axios.post("http://localhost:5000/cart", {
+      await axios.post(`${import.meta.env.VITE_API_URL}/cart`, {
         userId: user._id,
         items: updatedCart,
       });

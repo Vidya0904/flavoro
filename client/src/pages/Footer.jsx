@@ -277,7 +277,7 @@ function Footer() {
               </Typography>
               <List sx={{ p: 0 }}>
                 {contact.map((item) => (
-                  <ListItem key={item} disablePadding>
+                  <ListItem key={item.list} disablePadding>
                     <ListItemButton
                       sx={{
                         px: 0,
@@ -316,7 +316,7 @@ function Footer() {
 
               <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
                 {social.map((s, index) => (
-                  <Link href={s.link} sx={{ color: "#fff" }}>
+                  <Link key={index} href={s.link} sx={{ color: "#fff" }}>
                     {s.icon}
                   </Link>
                 ))}
@@ -335,8 +335,8 @@ function Footer() {
                 Information
               </Typography>
               <List sx={{ p: 0 }}>
-                {about.map((a, item) => (
-                  <ListItem key={item} disablePadding>
+                {about.map((a) => (
+                  <ListItem key={a.item} disablePadding>
                     <ListItemButton
                       sx={{
                         px: 0,
@@ -372,8 +372,8 @@ function Footer() {
                 My Account
               </Typography>
               <List sx={{ p: 0 }}>
-                {account.map((a, item) => (
-                  <ListItem key={item} disablePadding>
+                {account.map((a) => (
+                  <ListItem key={a.item} disablePadding>
                     <ListItemButton
                       sx={{
                         px: 0,
@@ -409,8 +409,8 @@ function Footer() {
                 Customer Sevice
               </Typography>
               <List sx={{ p: 0 }}>
-                {custService.map((c, item) => (
-                  <ListItem key={item} disablePadding>
+                {custService.map((c) => (
+                  <ListItem key={c.item} disablePadding>
                     <ListItemButton
                       sx={{
                         px: 0,
@@ -458,8 +458,9 @@ function Footer() {
             justifyContent: "center",
           }}
         >
-          {hlist.map((h, item) => (
+          {hlist.map((h) => (
             <Typography
+              key={h.item}
               sx={{
                 color: "#fff",
                 fontWeight: "600",

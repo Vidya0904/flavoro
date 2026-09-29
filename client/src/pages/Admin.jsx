@@ -29,7 +29,8 @@ function Admin() {
 
       formData.append("image", image);
 
-      await axios.post("http://localhost:5000/add-product", formData);
+      // await axios.post("http://localhost:5000/add-product", formData);
+      await axios.post(`${import.meta.env.VITE_API_URL}/add-product`, formData);
 
       alert("Product added successfully 🎉");
 

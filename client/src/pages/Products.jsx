@@ -24,7 +24,8 @@ function Products({ cart, setCart, saveCartToDB }) {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/products");
+      // const res = await axios.get("http://localhost:5000/products");
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/products`);
 
       setProducts(res.data);
     } catch (error) {
@@ -85,7 +86,10 @@ function Products({ cart, setCart, saveCartToDB }) {
     }
 
     try {
-      await axios.delete(`http://localhost:5000/delete-product/${id}`);
+      // await axios.delete(`http://localhost:5000/delete-product/${id}`);
+      await axios.delete(
+        `${import.meta.env.VITE_API_URL}/delete-product/${id}`,
+      );
 
       setProducts(products.filter((product) => product._id !== id));
 
@@ -145,7 +149,10 @@ function Products({ cart, setCart, saveCartToDB }) {
               <Box
                 component="img"
                 src={
-                  product.image ? `http://localhost:5000${product.image}` : ""
+                  // product.image ? `http://localhost:5000${product.image}` : ""
+                  product.image
+                    ? `${import.meta.env.VITE_API_URL}${product.image}`
+                    : ""
                 }
                 alt={product.name}
                 sx={{

@@ -14,7 +14,7 @@ import App from "./App";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <BrowserRouter basename="/flavoro">
+      <BrowserRouter>
         <App />
       </BrowserRouter>
     </ThemeProvider>

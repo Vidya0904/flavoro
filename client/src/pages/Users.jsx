@@ -21,7 +21,10 @@ function Users() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/admin/users");
+        // const response = await axios.get("http://localhost:5000/admin/users");
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/admin/users`,
+        );
         const data = response.data;
 
         const normalUsers = data.filter((user) => user.role !== "admin");
@@ -38,7 +41,8 @@ function Users() {
     if (!window.confirm("Delete this user?")) return;
 
     try {
-      await axios.delete(`http://localhost:5000/delete-user/${id}`);
+      // await axios.delete(`http://localhost:5000/delete-user/${id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/delete-user/${id}`);
 
       setUsers(users.filter((user) => user._id !== id));
     } catch (error) {
