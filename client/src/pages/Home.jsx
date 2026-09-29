@@ -302,7 +302,7 @@ function Home() {
       </Box>
       {/* Card */}
       <Grid container columns={12} sx={{ mt: -1 }}>
-        <Grid size={{ xs: 12, md: 4 }} sx={{ position: "relative" }}>
+        <Grid size={{ xs: 12, sm: 4, md: 4 }} sx={{ position: "relative" }}>
           <Box
             component="img"
             src="/images/cards/c1.jpg"
@@ -313,7 +313,7 @@ function Home() {
             sx={{
               position: "absolute",
               right: "20px",
-              top: "90px",
+              top: { xs: "50px", sm: "60px", md: "90px" },
               width: "250px",
               transition: "0.3s ease",
             }}
@@ -322,7 +322,7 @@ function Home() {
               sx={{
                 color: "#fff",
                 textShadow: "2px 1px 2px rgba(0, 0, 0, 0.7);",
-                fontSize: "30px",
+                fontSize: { xs: "30px", sm: "20px", md: "30px" },
                 fontWeight: 700,
                 lineHeight: 1.1,
                 textTransform: "uppercase",
@@ -346,7 +346,7 @@ function Home() {
             </Typography>
           </Box>
         </Grid>
-        <Grid size={{ xs: 12, md: 4 }} sx={{ position: "relative" }}>
+        <Grid size={{ xs: 12, sm: 4, md: 4 }} sx={{ position: "relative" }}>
           <Box
             component="img"
             src="/images/cards/c2.jpg"
@@ -357,7 +357,7 @@ function Home() {
             sx={{
               position: "absolute",
               right: "20px",
-              top: "90px",
+              top: { xs: "50px", sm: "60px", md: "90px" },
               width: "250px",
               transition: "0.3s ease",
             }}
@@ -366,7 +366,7 @@ function Home() {
               sx={{
                 color: "#fff",
                 textShadow: "2px 1px 2px rgba(0, 0, 0, 0.7);",
-                fontSize: "30px",
+                fontSize: { xs: "30px", sm: "20px", md: "30px" },
                 fontWeight: 700,
                 lineHeight: 1.1,
                 textTransform: "uppercase",
@@ -389,7 +389,7 @@ function Home() {
             </Typography>
           </Box>
         </Grid>
-        <Grid size={{ xs: 12, md: 4 }} sx={{ position: "relative" }}>
+        <Grid size={{ xs: 12, sm: 4, md: 4 }} sx={{ position: "relative" }}>
           <Box
             component="img"
             src="/images/cards/c3.jpg"
@@ -400,7 +400,7 @@ function Home() {
             sx={{
               position: "absolute",
               right: "20px",
-              top: "90px",
+              top: { xs: "50px", sm: "60px", md: "90px" },
               width: "250px",
               transition: "0.3s ease",
             }}
@@ -409,7 +409,7 @@ function Home() {
               sx={{
                 color: "#fff",
                 textShadow: "2px 1px 2px rgba(0, 0, 0, 0.7);",
-                fontSize: "30px",
+                fontSize: { xs: "30px", sm: "20px", md: "30px" },
                 fontWeight: 700,
                 lineHeight: 1.1,
                 textTransform: "uppercase",
@@ -434,8 +434,8 @@ function Home() {
         </Grid>
       </Grid>
       {/* About */}
-      <Box>
-        <Grid container columns={12} sx={{ my: 10, px: 5 }}>
+      <Box sx={{ px: { xs: 2, md: 8 } }}>
+        <Grid container columns={12} sx={{ my: 10 }}>
           <Grid
             size={{ xs: 12, md: 6 }}
             sx={{
@@ -520,7 +520,7 @@ function Home() {
         <Box
           sx={{
             py: 5,
-            pr: 4,
+            pr: { xs: 0, md: 4 },
             width: { xs: "100%", md: "60%" },
             marginLeft: { xs: "0", md: "auto" },
           }}
@@ -541,11 +541,11 @@ function Home() {
             spacing={4}
             sx={{
               mt: 3,
-              px: 5,
+              px: { xs: 2, md: 5 },
             }}
           >
             <Grid
-              size={{ xs: 12, md: 6 }}
+              size={{ xs: 12, sm: 6, md: 6 }}
               sx={{
                 backgroundColor: "rgb(244, 243, 243)",
                 borderRadius: "6px",
@@ -682,7 +682,7 @@ function Home() {
               </Box>
             </Grid>
             <Grid
-              size={{ xs: 12, md: 6 }}
+              size={{ xs: 12, sm: 6, md: 6 }}
               sx={{
                 backgroundColor: "rgb(244, 243, 243)",
                 borderRadius: "6px",
@@ -819,7 +819,7 @@ function Home() {
               </Box>
             </Grid>
             <Grid
-              size={{ xs: 12, md: 6 }}
+              size={{ xs: 12, sm: 6, md: 6 }}
               sx={{
                 backgroundColor: "rgb(244, 243, 243)",
                 borderRadius: "6px",
@@ -956,7 +956,7 @@ function Home() {
               </Box>
             </Grid>
             <Grid
-              size={{ xs: 12, md: 6 }}
+              size={{ xs: 12, sm: 6, md: 6 }}
               sx={{
                 backgroundColor: "rgb(244, 243, 243)",
                 borderRadius: "6px",
@@ -1096,47 +1096,81 @@ function Home() {
         </Box>
       </Box>
       {/* Services */}
-      <Box sx={{ my: 8, px: 8 }}>
+      <Box sx={{ my: 8, px: { xs: 2, md: 8 } }}>
         <Grid
           container
           columns={12}
-          spacing={10}
+          spacing={{ xs: 2, sm: 1, md: 10 }}
           sx={{ border: "1px solid #000", p: 5 }}
         >
-          <Grid size={{ xs: 12, md: 4 }}>
-            <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Grid size={{ xs: 12, sm: 4, md: 4 }}>
+            <Box
+              sx={{
+                display: { xs: "flex", sm: "block", md: "flex" },
+                alignItems: "center",
+                textAlign: { xs: "left", sm: "center", md: "left" },
+              }}
+            >
               <img src="./images/services/support.png" width="50px" />
-              <Box sx={{ ml: 3 }}>
+              <Box sx={{ ml: { xs: 3, sm: 0, md: 3 } }}>
                 <Typography
                   variant="h5"
-                  sx={{ color: "#000", fontWeight: "600", mb: 1 }}
+                  sx={{
+                    color: "#000",
+                    fontWeight: "600",
+                    mb: 1,
+                    fontSize: { xs: "18px", md: "25px" },
+                  }}
                 >
                   24/7 free support
                 </Typography>
-                <Typography variant="body2" sx={{ color: "#777" }}>
+                <Typography
+                  variant="body2"
+                  sx={{ color: "#777", fontSize: { xs: "12px", md: "16px" } }}
+                >
                   Passage of Lorem Ipsum, you need to be amet embarrassing.
                 </Typography>
               </Box>
             </Box>
           </Grid>
-          <Grid size={{ xs: 12, md: 4 }}>
-            <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Grid size={{ xs: 12, sm: 4, md: 4 }}>
+            <Box
+              sx={{
+                display: { xs: "flex", sm: "block", md: "flex" },
+                alignItems: "center",
+                textAlign: { xs: "left", sm: "center", md: "left" },
+              }}
+            >
               <img src="./images/services/transport.png" width="50px" />
               <Box sx={{ ml: 3 }}>
                 <Typography
                   variant="h5"
-                  sx={{ color: "#000", fontWeight: "600", mb: 1 }}
+                  sx={{
+                    color: "#000",
+                    fontWeight: "600",
+                    mb: 1,
+                    fontSize: { xs: "18px", md: "25px" },
+                  }}
                 >
                   Free worldwide shipping
                 </Typography>
-                <Typography variant="body2" sx={{ color: "#777" }}>
+                <Typography
+                  variant="body2"
+                  sx={{ color: "#777", fontSize: { xs: "12px", md: "16px" } }}
+                >
                   Passage of Lorem Ipsum, you need to be amet embarrassing.
                 </Typography>
               </Box>
             </Box>
           </Grid>
-          <Grid size={{ xs: 12, md: 4 }}>
-            <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Grid size={{ xs: 12, sm: 4, md: 4 }}>
+            <Box
+              sx={{
+                display: { xs: "flex", sm: "block", md: "flex" },
+                alignItems: "center",
+                textAlign: { xs: "left", sm: "center", md: "left" },
+              }}
+            >
               <img
                 src="./images/services/money-back-guarantee.png"
                 width="50px"
@@ -1144,11 +1178,19 @@ function Home() {
               <Box sx={{ ml: 3 }}>
                 <Typography
                   variant="h5"
-                  sx={{ color: "#000", fontWeight: "600", mb: 1 }}
+                  sx={{
+                    color: "#000",
+                    fontWeight: "600",
+                    mb: 1,
+                    fontSize: { xs: "18px", md: "25px" },
+                  }}
                 >
                   Money back guarantee
                 </Typography>
-                <Typography variant="body2" sx={{ color: "#777" }}>
+                <Typography
+                  variant="body2"
+                  sx={{ color: "#777", fontSize: { xs: "12px", md: "16px" } }}
+                >
                   Passage of Lorem Ipsum, you need to be amet embarrassing.
                 </Typography>
               </Box>
@@ -1157,11 +1199,11 @@ function Home() {
         </Grid>
       </Box>
       {/* Img Banner */}
-      <Grid container columns={12} spacing={4} sx={{ px: 8 }}>
-        <Grid size={{ xs: 12, md: 6 }}>
+      <Grid container columns={12} spacing={4} sx={{ px: { xs: 2, md: 8 } }}>
+        <Grid size={{ xs: 12, sm: 6, md: 6 }}>
           <img src="./images/imgBanner/imgbanner-1.jpg" width="100%" />
         </Grid>
-        <Grid size={{ xs: 12, md: 6 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 6 }}>
           <img src="./images/imgBanner/imgbanner-2.jpg" width="100%" />
         </Grid>
       </Grid>
@@ -1193,7 +1235,7 @@ function Home() {
               {/* Content */}
               <Box
                 sx={{
-                  p: 8,
+                  p: { xs: 2, md: 8 },
                   textAlign: "center",
                 }}
               >
@@ -1233,7 +1275,7 @@ function Home() {
         </SlickSlider>
       </Box>
       {/* Blog  */}
-      <Box sx={{ px: 8, my: 8 }}>
+      <Box sx={{ px: { xs: 2, md: 8 }, my: 8 }}>
         <Typography variant="h4" sx={{ color: "#000", fontWeight: "700" }}>
           Latest Blog
         </Typography>
@@ -1243,7 +1285,7 @@ function Home() {
 
         <Grid container columns={12} spacing={5} sx={{ mt: 3 }}>
           {blogs.map((b, index) => (
-            <Grid key={index} size={{ xs: 12, md: 4 }}>
+            <Grid key={index} size={{ xs: 12, sm: 6, md: 4 }}>
               <Card sx={{ boxShadow: "0px 0px 8px 0px rgba(4, 0, 0, 0.08)" }}>
                 <CardMedia sx={{ height: 200 }} image={b.img} title="b1" />
                 <CardContent>
@@ -1289,9 +1331,18 @@ function Home() {
         </Grid>
       </Box>
       {/* Brands */}
-      <Grid container columns={16} spacing={2} sx={{ my: 5, px: 8 }}>
+      <Grid
+        container
+        columns={16}
+        spacing={2}
+        sx={{ my: 5, px: { xs: 2, md: 8 } }}
+      >
         {brands.map((b, index) => (
-          <Grid key={index} size={{xs:8,md:2}}>
+          <Grid
+            key={index}
+            size={{ xs: 8, sm: 4, md: 2 }}
+            sx={{ display: "flex", justifyContent: "center" }}
+          >
             <Box component="img" src={b.img} sx={{ width: "120px" }} />
           </Grid>
         ))}
