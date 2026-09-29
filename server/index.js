@@ -19,7 +19,11 @@ connectDB();
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://vidya0904.github.io"],
+    origin: [
+      "http://localhost:5173",
+      "https://vidya0904.github.io",
+      "https://flavoro-xi.vercel.app",
+    ],
   }),
 );
 
