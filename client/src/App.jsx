@@ -10,13 +10,20 @@ import {
   CircularProgress,
   Menu,
   MenuItem,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Divider,
 } from "@mui/material";
 import {
   AccountCircle,
   DeleteOutlineOutlined,
   LogoutOutlined,
 } from "@mui/icons-material";
-
+import { Menu as MenuIcon } from "@mui/icons-material";
 import { Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
 
 import axios from "axios";
@@ -34,6 +41,16 @@ function App() {
   const [cart, setCart] = useState([]);
   const [cartLoaded, setCartLoaded] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleMobileMenuClose = () => {
+    setMobileMenuOpen(false);
+  };
+
+  const handleMobileNavigation = (path) => {
+    setMobileMenuOpen(false);
+    navigate(path);
+  };
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
@@ -138,7 +155,7 @@ function App() {
   return (
     <>
       <CssBaseline />
-      {/* <Box sx={{ flexGrow: 1, mb: 8 }}>
+      <Box sx={{ flexGrow: 1, mb: 8 }}>
         <AppBar
           position="fixed"
           sx={{
@@ -146,6 +163,20 @@ function App() {
           }}
         >
           <Toolbar>
+            {/* MOBILE MENU ICON */}
+            <IconButton
+              edge="start"
+              onClick={() => setMobileMenuOpen(true)}
+              sx={{
+                color: "white",
+                display: { xs: "flex", md: "none" },
+                mr: 1,
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+
+            {/* LOGO */}
             <Typography
               sx={{
                 flexGrow: 1,
@@ -156,26 +187,26 @@ function App() {
               Flavoro 🌿
             </Typography>
 
-            {user && (
-              <>
-                <Button sx={{ color: "white" }} component={Link} to="/home">
-                  Home
-                </Button>
+            {/* DESKTOP NAVIGATION */}
+            <Box
+              sx={{
+                display: { xs: "none", md: "flex" },
+                alignItems: "center",
+              }}
+            >
+              <Button sx={{ color: "white" }} component={Link} to="/">
+                Home
+              </Button>
 
-                <Button sx={{ color: "white" }} component={Link} to="/products">
-                  Products
-                </Button>
+              <Button sx={{ color: "white" }} component={Link} to="/products">
+                Products
+              </Button>
 
-                {user.role === "admin" ? (
-                  <Button sx={{ color: "white" }} component={Link} to="/users">
-                    Users
-                  </Button>
-                ) : (
-                  <Button sx={{ color: "white" }} component={Link} to="/cart">
-                    Cart ({cart.reduce((total, item) => total + item.qty, 0)})
-                  </Button>
-                )}
+              <Button sx={{ color: "white" }} component={Link} to="/cart">
+                Cart ({cart.reduce((total, item) => total + item.qty, 0)})
+              </Button>
 
+              {user ? (
                 <Box>
                   <Button
                     onClick={handleProfileClick}
@@ -216,101 +247,138 @@ function App() {
                     </MenuItem>
                   </Menu>
                 </Box>
-              </>
-            )}
-          </Toolbar>
-        </AppBar>
-      </Box> */}
-      <Box sx={{ flexGrow: 1, mb: 8 }}>
-        <AppBar
-          position="fixed"
-          sx={{
-            backgroundColor: "#66a617",
-          }}
-        >
-          <Toolbar>
-            <Typography
+              ) : (
+                <Button
+                  component={Link}
+                  to="/login"
+                  sx={{
+                    color: "white",
+                    fontWeight: 600,
+                  }}
+                >
+                  Login
+                </Button>
+              )}
+            </Box>
+
+            {/* MOBILE LOGIN / PROFILE */}
+            <Box
               sx={{
-                flexGrow: 1,
-                fontWeight: "800",
-                textTransform: "uppercase",
+                display: { xs: "flex", md: "none" },
               }}
             >
-              Flavoro 🌿
-            </Typography>
-
-            {/* HOME - Always visible */}
-            <Button sx={{ color: "white" }} component={Link} to="/">
-              Home
-            </Button>
-
-            {/* PRODUCTS - Always visible */}
-            <Button sx={{ color: "white" }} component={Link} to="/products">
-              Products
-            </Button>
-
-            {/* CART - Always visible */}
-            <Button sx={{ color: "white" }} component={Link} to="/cart">
-              Cart ({cart.reduce((total, item) => total + item.qty, 0)})
-            </Button>
-
-            {user ? (
-              /* AFTER LOGIN */
-              <Box>
+              {user ? (
                 <Button
                   onClick={handleProfileClick}
                   startIcon={<AccountCircle />}
                   sx={{
                     color: "white",
                     textTransform: "none",
+                    minWidth: "auto",
                   }}
                 >
                   {user?.name || user?.role}
                 </Button>
-
-                <Menu
-                  anchorEl={anchorEl}
-                  open={Boolean(anchorEl)}
-                  onClose={handleProfileClose}
+              ) : (
+                <Button
+                  component={Link}
+                  to="/login"
+                  sx={{
+                    color: "white",
+                    fontWeight: 600,
+                  }}
                 >
-                  {user?.role !== "admin" && (
-                    <MenuItem
-                      onClick={() => {
-                        handleProfileClose();
-                        handleDeleteAccount();
-                      }}
-                    >
-                      <DeleteOutlineOutlined sx={{ mr: 1 }} />
-                      Delete Account
-                    </MenuItem>
-                  )}
-
-                  <MenuItem
-                    onClick={() => {
-                      handleProfileClose();
-                      handleLogout();
-                    }}
-                  >
-                    <LogoutOutlined sx={{ mr: 1 }} />
-                    Logout
-                  </MenuItem>
-                </Menu>
-              </Box>
-            ) : (
-              /* BEFORE LOGIN */
-              <Button
-                sx={{
-                  color: "white",
-                  fontWeight: 600,
-                }}
-                component={Link}
-                to="/login"
-              >
-                Login
-              </Button>
-            )}
+                  Login
+                </Button>
+              )}
+            </Box>
           </Toolbar>
         </AppBar>
+
+        {/* MOBILE DRAWER */}
+        <Drawer
+          anchor="left"
+          open={mobileMenuOpen}
+          onClose={handleMobileMenuClose}
+        >
+          <Box
+            sx={{
+              width: 250,
+            }}
+            role="presentation"
+          >
+            <Box
+              sx={{
+                p: 2,
+                backgroundColor: "#66a617",
+              }}
+            >
+              <Typography
+                sx={{
+                  color: "white",
+                  fontWeight: 800,
+                  textTransform: "uppercase",
+                }}
+              >
+                Flavoro 🌿
+              </Typography>
+            </Box>
+
+            <List>
+              <ListItem disablePadding>
+                <ListItemButton onClick={() => handleMobileNavigation("/")}>
+                  <ListItemText primary="Home" />
+                </ListItemButton>
+              </ListItem>
+
+              <ListItem disablePadding>
+                <ListItemButton
+                  onClick={() => handleMobileNavigation("/products")}
+                >
+                  <ListItemText primary="Products" />
+                </ListItemButton>
+              </ListItem>
+
+              <ListItem disablePadding>
+                <ListItemButton onClick={() => handleMobileNavigation("/cart")}>
+                  <ListItemText
+                    primary={`Cart (${cart.reduce(
+                      (total, item) => total + item.qty,
+                      0,
+                    )})`}
+                  />
+                </ListItemButton>
+              </ListItem>
+
+              <Divider />
+
+              {user && (
+                <>
+                  {user.role === "admin" && (
+                    <ListItem disablePadding>
+                      <ListItemButton
+                        onClick={() => handleMobileNavigation("/users")}
+                      >
+                        <ListItemText primary="Users" />
+                      </ListItemButton>
+                    </ListItem>
+                  )}
+
+                  <ListItem disablePadding>
+                    <ListItemButton
+                      onClick={() => {
+                        handleMobileMenuClose();
+                        handleLogout();
+                      }}
+                    >
+                      <ListItemText primary="Logout" />
+                    </ListItemButton>
+                  </ListItem>
+                </>
+              )}
+            </List>
+          </Box>
+        </Drawer>
       </Box>
 
       <Routes>

@@ -216,7 +216,14 @@ function Footer() {
         <Box sx={{ p: 5 }}>
           <Typography
             variant="h4"
+            gutterBottom
             sx={{
+              fontSize: {
+                xs: "28px",
+                sm: "32px",
+                md: "40px",
+                lg: "48px",
+              },
               textTransform: "uppercase",
               fontWeight: "600",
               mb: 2,
@@ -230,7 +237,7 @@ function Footer() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              gap: 2,
+              gap: 1,
             }}
           >
             <Input
@@ -266,9 +273,9 @@ function Footer() {
           </Typography>
         </Box>
         <Divider sx={{ borderColor: "#777" }} />
-        <Box sx={{ p: 8 }}>
-          <Grid container column={12}>
-            <Grid size={3}>
+        <Box sx={{ p: { xs: 2, md: 8 } }}>
+          <Grid container column={12} spacing={{ xs: 2, md: 0 }}>
+            <Grid size={{ xs: 6, md: 3 }}>
               <Typography
                 variant="h5"
                 sx={{ textTransform: "uppercase", fontWeight: "600", mb: 2 }}
@@ -322,7 +329,7 @@ function Footer() {
                 ))}
               </Stack>
             </Grid>
-            <Grid size={3}>
+            <Grid size={{ xs: 6, md: 3 }}>
               <Typography
                 variant="h5"
                 sx={{
@@ -364,7 +371,7 @@ function Footer() {
                 ))}
               </List>
             </Grid>
-            <Grid size={3}>
+            <Grid size={{ xs: 6, md: 3 }}>
               <Typography
                 variant="h5"
                 sx={{ textTransform: "uppercase", fontWeight: "600", mb: 2 }}
@@ -401,7 +408,7 @@ function Footer() {
                 ))}
               </List>
             </Grid>
-            <Grid size={3}>
+            <Grid size={{ xs: 6, md: 3 }}>
               <Typography
                 variant="h5"
                 sx={{ textTransform: "uppercase", fontWeight: "600", mb: 2 }}
