@@ -138,7 +138,7 @@ function App() {
   return (
     <>
       <CssBaseline />
-      <Box sx={{ flexGrow: 1, mb: 8 }}>
+      {/* <Box sx={{ flexGrow: 1, mb: 8 }}>
         <AppBar
           position="fixed"
           sx={{
@@ -175,10 +175,6 @@ function App() {
                     Cart ({cart.reduce((total, item) => total + item.qty, 0)})
                   </Button>
                 )}
-
-                {/* <Button sx={{ color: "white" }} onClick={handleLogout}>
-                Logout {user?.name || user?.role}
-              </Button> */}
 
                 <Box>
                   <Button
@@ -224,34 +220,108 @@ function App() {
             )}
           </Toolbar>
         </AppBar>
+      </Box> */}
+      <Box sx={{ flexGrow: 1, mb: 8 }}>
+        <AppBar
+          position="fixed"
+          sx={{
+            backgroundColor: "#66a617",
+          }}
+        >
+          <Toolbar>
+            <Typography
+              sx={{
+                flexGrow: 1,
+                fontWeight: "800",
+                textTransform: "uppercase",
+              }}
+            >
+              Flavoro 🌿
+            </Typography>
+
+            {/* HOME - Always visible */}
+            <Button sx={{ color: "white" }} component={Link} to="/">
+              Home
+            </Button>
+
+            {/* PRODUCTS - Always visible */}
+            <Button sx={{ color: "white" }} component={Link} to="/products">
+              Products
+            </Button>
+
+            {/* CART - Always visible */}
+            <Button sx={{ color: "white" }} component={Link} to="/cart">
+              Cart ({cart.reduce((total, item) => total + item.qty, 0)})
+            </Button>
+
+            {user ? (
+              /* AFTER LOGIN */
+              <Box>
+                <Button
+                  onClick={handleProfileClick}
+                  startIcon={<AccountCircle />}
+                  sx={{
+                    color: "white",
+                    textTransform: "none",
+                  }}
+                >
+                  {user?.name || user?.role}
+                </Button>
+
+                <Menu
+                  anchorEl={anchorEl}
+                  open={Boolean(anchorEl)}
+                  onClose={handleProfileClose}
+                >
+                  {user?.role !== "admin" && (
+                    <MenuItem
+                      onClick={() => {
+                        handleProfileClose();
+                        handleDeleteAccount();
+                      }}
+                    >
+                      <DeleteOutlineOutlined sx={{ mr: 1 }} />
+                      Delete Account
+                    </MenuItem>
+                  )}
+
+                  <MenuItem
+                    onClick={() => {
+                      handleProfileClose();
+                      handleLogout();
+                    }}
+                  >
+                    <LogoutOutlined sx={{ mr: 1 }} />
+                    Logout
+                  </MenuItem>
+                </Menu>
+              </Box>
+            ) : (
+              /* BEFORE LOGIN */
+              <Button
+                sx={{
+                  color: "white",
+                  fontWeight: 600,
+                }}
+                component={Link}
+                to="/login"
+              >
+                Login
+              </Button>
+            )}
+          </Toolbar>
+        </AppBar>
       </Box>
 
       <Routes>
-        {/* LOGIN */}
+        {/* HOME */}
+        <Route path="/" element={<Home />} />
 
-        <Route
-          path="/"
-          element={
-            user ? (
-              <Navigate
-                to={user.role === "admin" ? "/products" : "/products"}
-              />
-            ) : (
-              <Login setUser={setUser} />
-            )
-          }
-        />
+        {/* LOGIN */}
+        <Route path="/login" element={<Login setUser={setUser} />} />
 
         {/* SIGNUP */}
-
         <Route path="/signup" element={<Signup />} />
-
-        {/* HOME */}
-
-        <Route
-          path="/home"
-          element={user ? <Home /> : <Login setUser={setUser} />}
-        />
 
         {/* PRODUCTS */}
 

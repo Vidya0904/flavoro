@@ -75,7 +75,7 @@ function Login({ setUser }) {
         setEmail("");
         setPassword("");
 
-        navigate("/products");
+        navigate("/");
       }
     } catch (error) {
       console.log(error);
