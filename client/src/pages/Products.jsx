@@ -148,12 +148,13 @@ function Products({ cart, setCart, saveCartToDB }) {
             >
               <Box
                 component="img"
-                src={
-                  // product.image ? `http://localhost:5000${product.image}` : ""
-                  product.image
-                    ? `${import.meta.env.VITE_API_URL}${product.image}`
-                    : ""
-                }
+                // src={
+                //   // product.image ? `http://localhost:5000${product.image}` : ""
+                //   product.image
+                //     ? `${import.meta.env.VITE_API_URL}${product.image}`
+                //     : ""
+                // }
+                src={product.image || ""}
                 alt={product.name}
                 sx={{
                   width: "100%",

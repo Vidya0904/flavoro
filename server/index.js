@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -6,6 +8,7 @@ const path = require("path");
 const multer = require("multer");
 
 const connectDB = require("./config/db");
+const cloudinary = require("./config/cloudinary");
 
 const Product = require("./models/Product");
 const Cart = require("./models/Cart");
@@ -41,15 +44,21 @@ app.get("/", (req, res) => {
 // IMAGE UPLOAD
 // ===============================
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/");
-  },
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, "uploads/");
+//   },
 
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
-});
+//   filename: function (req, file, cb) {
+//     cb(null, Date.now() + path.extname(file.originalname));
+//   },
+// });
+
+// const upload = multer({
+//   storage: storage,
+// });
+
+const storage = multer.memoryStorage();
 
 const upload = multer({
   storage: storage,
@@ -186,6 +195,39 @@ app.get("/products/:userId", async (req, res) => {
 // ADD PRODUCT
 // ===============================
 
+// app.post("/add-product", upload.single("image"), async (req, res) => {
+//   try {
+//     const { name, price } = req.body;
+
+//     if (!name || !price) {
+//       return res.status(400).json({
+//         message: "Product name and price are required",
+//       });
+//     }
+
+//     const image = req.file ? `/uploads/${req.file.filename}` : "";
+
+//     const newProduct = new Product({
+//       name,
+//       price,
+//       image,
+//     });
+
+//     await newProduct.save();
+
+//     res.json({
+//       message: "Product added successfully",
+//       product: newProduct,
+//     });
+//   } catch (error) {
+//     console.log(error);
+
+//     res.status(500).json({
+//       message: error.message,
+//     });
+//   }
+// });
+
 app.post("/add-product", upload.single("image"), async (req, res) => {
   try {
     const { name, price } = req.body;
@@ -196,12 +238,33 @@ app.post("/add-product", upload.single("image"), async (req, res) => {
       });
     }
 
-    const image = req.file ? `/uploads/${req.file.filename}` : "";
+    if (!req.file) {
+      return res.status(400).json({
+        message: "Product image is required",
+      });
+    }
+
+    const result = await new Promise((resolve, reject) => {
+      const uploadStream = cloudinary.uploader.upload_stream(
+        {
+          folder: "flavoro/products",
+        },
+        (error, result) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(result);
+          }
+        },
+      );
+
+      uploadStream.end(req.file.buffer);
+    });
 
     const newProduct = new Product({
       name,
       price,
-      image,
+      image: result.secure_url,
     });
 
     await newProduct.save();
