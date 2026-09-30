@@ -267,7 +267,7 @@ function Login({ setUser }) {
             }}
             onClick={() => navigate("/signup")}
           >
-            Signup here
+            Sign up here
           </Box>
         </Typography>
       </Paper>

@@ -183,7 +183,7 @@ function Signup() {
               fontWeight: 700,
               cursor: "pointer",
             }}
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/login")}
           >
             Login
           </Box>
