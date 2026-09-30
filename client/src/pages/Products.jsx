@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 
 function Products({ cart, setCart, saveCartToDB }) {
   const [products, setProducts] = useState([]);
+  const [kg, setKg] = useState({});
   const navigate = useNavigate();
 
   const user = JSON.parse(localStorage.getItem("user"));
@@ -101,6 +102,24 @@ function Products({ cart, setCart, saveCartToDB }) {
     }
   };
 
+  // ===============================
+  // INCREMENT DECREMENT PRODUCT KG
+  // ===============================
+
+  const increaseKg = (productId) => {
+    setKg((prev) => ({
+      ...prev,
+      [productId]: (prev[productId] || 1) + 1,
+    }));
+  };
+
+  const decreaseKg = (productId) => {
+    setKg((prev) => ({
+      ...prev,
+      [productId]: Math.max((prev[productId] || 1) - 1, 1),
+    }));
+  };
+
   return (
     <Box sx={{ p: 3 }}>
       <Typography
@@ -136,7 +155,7 @@ function Products({ cart, setCart, saveCartToDB }) {
             size={{
               xs: 12,
               sm: 6,
-              md: 4,
+              md: 3,
             }}
           >
             <Card

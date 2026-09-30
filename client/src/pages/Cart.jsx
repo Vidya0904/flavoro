@@ -31,7 +31,7 @@ function Cart({ cart, setCart, saveCartToDB }) {
           } else {
             return {
               ...item,
-              qty: item.qty - 1,
+              qty: Math.max(item.qty - 1, 1),
             };
           }
         }
@@ -120,7 +120,10 @@ function Cart({ cart, setCart, saveCartToDB }) {
                     {item.name}
                   </Typography>
 
-                  <Typography>₹{item.price}</Typography>
+                  {/* <Typography>₹{item.price}</Typography> */}
+                  <Typography>
+                    ₹{item.price * item.qty} ({item.price}/KG)
+                  </Typography>
 
                   <Box
                     sx={{
@@ -137,7 +140,7 @@ function Cart({ cart, setCart, saveCartToDB }) {
                       -
                     </Button>
 
-                    <Typography>{item.qty}</Typography>
+                    <Typography>{item.qty} KG</Typography>
 
                     <Button
                       variant="outlined"
