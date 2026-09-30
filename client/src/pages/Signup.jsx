@@ -59,7 +59,7 @@ function Signup() {
 
       alert("Signup successful 🎉");
 
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       console.log(error);
 
