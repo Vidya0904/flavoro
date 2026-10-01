@@ -337,7 +337,7 @@ function App() {
                 <IconButton
                   component={Link}
                   to="/wishlist"
-                  sx={{ color: "white" }}
+                  sx={{ color: "#fff" }}
                 >
                   <FavoriteBorderIcon />
                 </IconButton>
