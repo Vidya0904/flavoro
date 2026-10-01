@@ -24,6 +24,7 @@ import {
   LogoutOutlined,
 } from "@mui/icons-material";
 import { Menu as MenuIcon } from "@mui/icons-material";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
 
 import axios from "axios";
@@ -36,9 +37,11 @@ import Admin from "./pages/Admin";
 import Users from "./pages/Users";
 import Home from "./pages/Home";
 import Footer from "./pages/Footer";
+import Wishlist from "./pages/Wishlist";
 
 function App() {
   const [cart, setCart] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
   const [cartLoaded, setCartLoaded] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -88,6 +91,14 @@ function App() {
     fetchCart();
   }, [user]);
 
+  useEffect(() => {
+    if (user?._id) {
+      fetchWishlist();
+    } else {
+      setWishlist([]);
+    }
+  }, [user]);
+
   // ===============================
   // SAVE CART
   // ===============================
@@ -105,6 +116,41 @@ function App() {
       });
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  // ===============================
+  // SAVE WISHLIST
+  // ===============================
+
+  const saveWishlistToDB = async (updatedWishlist) => {
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      if (!user) return;
+
+      await axios.post(`${import.meta.env.VITE_API_URL}/wishlist`, {
+        userId: user._id,
+        items: updatedWishlist,
+      });
+    } catch (error) {
+      console.log("Wishlist save error:", error);
+    }
+  };
+
+  const fetchWishlist = async () => {
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      if (!user) return;
+
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/wishlist/${user._id}`,
+      );
+
+      setWishlist(res.data.items || []);
+    } catch (error) {
+      console.log("Wishlist fetch error:", error);
     }
   };
 
@@ -160,6 +206,7 @@ function App() {
           position="fixed"
           sx={{
             backgroundColor: "#66a617",
+            px: { xs: 2, md: 6 },
           }}
         >
           <Toolbar>
@@ -211,9 +258,18 @@ function App() {
                   Users
                 </Button>
               ) : (
-                <Button sx={{ color: "white" }} component={Link} to="/cart">
-                  Cart ({cart.reduce((total, item) => total + item.qty, 0)})
-                </Button>
+                <>
+                  <Button sx={{ color: "white" }} component={Link} to="/cart">
+                    Cart ({cart.reduce((total, item) => total + item.qty, 0)})
+                  </Button>
+                  <Button
+                    sx={{ color: "white" }}
+                    component={Link}
+                    to="/wishlist"
+                  >
+                    <FavoriteBorderIcon />
+                  </Button>
+                </>
               )}
 
               {user ? (
@@ -416,6 +472,9 @@ function App() {
               cart={cart}
               setCart={setCart}
               saveCartToDB={saveCartToDB}
+              wishlist={wishlist}
+              setWishlist={setWishlist}
+              saveWishlistToDB={saveWishlistToDB}
             />
             // ) : (
             // <Navigate to="/" />
@@ -448,6 +507,26 @@ function App() {
         <Route
           path="/users"
           element={user?.role === "admin" ? <Users /> : <Navigate to="/" />}
+        />
+
+        {/* WishList */}
+
+        <Route
+          path="/wishlist"
+          element={
+            user ? (
+              <Wishlist
+                wishlist={wishlist}
+                setWishlist={setWishlist}
+                saveWishlistToDB={saveWishlistToDB}
+                cart={cart}
+                setCart={setCart}
+                saveCartToDB={saveCartToDB}
+              />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
         />
       </Routes>
 

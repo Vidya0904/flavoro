@@ -9,12 +9,22 @@ import {
   Button,
   Grid,
   Box,
+  Rating,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import ShoppingBasketOutlinedIcon from "@mui/icons-material/ShoppingBasketOutlined";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
-function Products({ cart, setCart, saveCartToDB }) {
+function Products({
+  cart,
+  setCart,
+  saveCartToDB,
+  wishlist,
+  setWishlist,
+  saveWishlistToDB,
+}) {
   const [products, setProducts] = useState([]);
-  const [kg, setKg] = useState({});
   const navigate = useNavigate();
 
   const user = JSON.parse(localStorage.getItem("user"));
@@ -73,6 +83,27 @@ function Products({ cart, setCart, saveCartToDB }) {
     saveCartToDB(updatedCart);
   };
 
+  const toggleWishlist = (product) => {
+    const exists = wishlist.some((item) => item._id === product._id);
+
+    let updatedWishlist;
+
+    if (exists) {
+      updatedWishlist = wishlist.filter((item) => item._id !== product._id);
+    } else {
+      updatedWishlist = [
+        ...wishlist,
+        {
+          ...product,
+          productId: product._id,
+        },
+      ];
+    }
+
+    setWishlist(updatedWishlist);
+    saveWishlistToDB(updatedWishlist);
+  };
+
   // ===============================
   // DELETE PRODUCT
   // ===============================
@@ -102,26 +133,8 @@ function Products({ cart, setCart, saveCartToDB }) {
     }
   };
 
-  // ===============================
-  // INCREMENT DECREMENT PRODUCT KG
-  // ===============================
-
-  const increaseKg = (productId) => {
-    setKg((prev) => ({
-      ...prev,
-      [productId]: (prev[productId] || 1) + 1,
-    }));
-  };
-
-  const decreaseKg = (productId) => {
-    setKg((prev) => ({
-      ...prev,
-      [productId]: Math.max((prev[productId] || 1) - 1, 1),
-    }));
-  };
-
   return (
-    <Box sx={{ p: 3 }}>
+    <Box sx={{ px: { xs: 2, md: 8 }, py: 3 }}>
       <Typography
         variant="h4"
         sx={{
@@ -161,8 +174,9 @@ function Products({ cart, setCart, saveCartToDB }) {
             <Card
               sx={{
                 height: "100%",
-                borderRadius: "15px",
-                boxShadow: 4,
+                borderRadius: "7px",
+                boxShadow: 0,
+                backgroundColor: "#f8f8f8",
               }}
             >
               <Box
@@ -177,32 +191,65 @@ function Products({ cart, setCart, saveCartToDB }) {
                 alt={product.name}
                 sx={{
                   width: "100%",
-                  height: 220,
+                  height: 200,
                   objectFit: "contain",
                   p: 2,
                 }}
               />
 
               <CardContent>
-                <Typography
-                  variant="h6"
+                <Box
                   sx={{
-                    fontWeight: 700,
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
                   }}
                 >
-                  {product.name}
-                </Typography>
+                  <Typography variant="h6" sx={{ fontWeight: 700 }}>
+                    {product.name}
+                  </Typography>
 
-                <Typography
-                  sx={{
-                    color: "#66a617",
-                    fontWeight: 700,
-                    mt: 1,
-                  }}
-                >
-                  ₹{product.price}
-                </Typography>
+                  <Button
+                    onClick={() => toggleWishlist(product)}
+                    sx={{
+                      minWidth: "auto",
+                      p: 0.5,
+                      color: wishlist.some((item) => item._id === product._id)
+                        ? "#e53935"
+                        : "#777",
 
+                      "&:hover": {
+                        backgroundColor: "transparent",
+                      },
+                    }}
+                  >
+                    {wishlist.some((item) => item._id === product._id) ? (
+                      <FavoriteIcon />
+                    ) : (
+                      <FavoriteBorderIcon />
+                    )}
+                  </Button>
+                </Box>
+                <Rating
+                  name="simple-controlled"
+                  value={4}
+                  precision={0.5}
+                  readOnly
+                  sx={{ color: "#66a617", fontSize: "20px" }}
+                />
+                <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
+                  <Typography
+                    sx={{
+                      color: "#66a617",
+                      fontWeight: 700,
+                    }}
+                  >
+                    ₹{product.price}
+                  </Typography>
+                  <Typography variant="body2" sx={{ ml: "3px", color: "#777" }}>
+                    /Kg
+                  </Typography>
+                </Box>
                 {user?.role === "admin" ? (
                   <Button
                     variant="contained"
@@ -220,10 +267,14 @@ function Products({ cart, setCart, saveCartToDB }) {
                     sx={{
                       mt: 2,
                       backgroundColor: "#66a617",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 1,
                     }}
                     onClick={() => addToCart(product)}
                   >
-                    Add to Cart
+                    <ShoppingBasketOutlinedIcon sx={{ fontSize: "25px" }} />
+                    <Typography variant="body1">Basket</Typography>
                   </Button>
                 )}
               </CardContent>

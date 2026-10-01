@@ -13,6 +13,7 @@ const cloudinary = require("./config/cloudinary");
 const Product = require("./models/Product");
 const Cart = require("./models/Cart");
 const User = require("./models/User");
+const Wishlist = require("./models/Wishlist");
 
 const app = express();
 
@@ -386,6 +387,63 @@ app.post("/cart", async (req, res) => {
     );
 
     res.json(cart);
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+});
+
+// ===============================
+// WISHLIST
+// ===============================
+
+app.post("/wishlist", async (req, res) => {
+  try {
+    const { userId, items } = req.body;
+
+    let wishlist = await Wishlist.findOne({ userId });
+
+    if (wishlist) {
+      wishlist.items = items;
+      await wishlist.save();
+    } else {
+      wishlist = new Wishlist({
+        userId,
+        items,
+      });
+
+      await wishlist.save();
+    }
+
+    res.json({
+      message: "Wishlist saved successfully",
+      wishlist,
+    });
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+});
+
+app.get("/wishlist/:userId", async (req, res) => {
+  try {
+    const wishlist = await Wishlist.findOne({
+      userId: req.params.userId,
+    });
+
+    if (!wishlist) {
+      return res.json({
+        items: [],
+      });
+    }
+
+    res.json(wishlist);
   } catch (error) {
     console.log(error);
 
