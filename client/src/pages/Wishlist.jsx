@@ -7,7 +7,6 @@ import {
   Button,
   Rating,
 } from "@mui/material";
-import React from "react";
 import ShoppingBasketOutlinedIcon from "@mui/icons-material/ShoppingBasketOutlined";
 
 function Wishlist({
