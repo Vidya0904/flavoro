@@ -333,6 +333,16 @@ function App() {
                 display: { xs: "flex", md: "none" },
               }}
             >
+              {user?.role !== "admin" && (
+                <IconButton
+                  component={Link}
+                  to="/wishlist"
+                  sx={{ color: "white" }}
+                >
+                  <FavoriteBorderIcon />
+                </IconButton>
+              )}
+
               {user ? (
                 <Button
                   onClick={handleProfileClick}
